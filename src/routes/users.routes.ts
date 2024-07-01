@@ -1,14 +1,14 @@
 import { Router } from 'express'
 
-const userRouter = Router()
+const usersRouter = Router()
 
-userRouter.use((req, res, next) => {
+usersRouter.use((req, res, next) => {
   console.log('Time: ', Date.now())
   next()
 })
 
-userRouter.get('/', (req, res) => {
+usersRouter.get('/', (req, res) => {
   res.send('Hello World!')
 })
 
-export default userRouter
+export default usersRouter
