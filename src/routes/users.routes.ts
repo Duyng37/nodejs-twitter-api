@@ -1,14 +1,9 @@
 import { Router } from 'express'
+import { loginController } from '~/controllers/users.controllers'
+import { loginValidator } from '~/middlewares/users.middlewares'
 
-const userRouter = Router()
+const usersRouter = Router()
 
-userRouter.use((req, res, next) => {
-  console.log('Time: ', Date.now())
-  next()
-})
+usersRouter.post('/login', loginValidator, loginController)
 
-userRouter.get('/', (req, res) => {
-  res.send('Hello World!')
-})
-
-export default userRouter
+export default usersRouter
