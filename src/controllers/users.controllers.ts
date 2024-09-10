@@ -1,6 +1,7 @@
-import User from '~/models/schemas/User.schema'
-import databaseService from '~/services/database.services'
 import userService from '~/services/users.services'
+import { ParamsDictionary } from 'express-serve-static-core'
+import { Request, Response } from 'express'
+import { RegisterReqBody } from '~/models/request/User.requests'
 
 export const loginController = (req: any, res: any) => {
   const { email, password } = req.body
@@ -10,10 +11,9 @@ export const loginController = (req: any, res: any) => {
   return res.status(401).json({ error: 'Unauthorized' })
 }
 
-export const registerController = async (req: any, res: any) => {
-  const { email, password } = req.body
+export const registerController = async (req: Request<ParamsDictionary, any, RegisterReqBody>, res: Response) => {
   try {
-    const result = await userService.register({ email, password })
+    const result = await userService.register(req.body)
 
     return res.json({ message: 'Register successfully', result })
   } catch (error) {
